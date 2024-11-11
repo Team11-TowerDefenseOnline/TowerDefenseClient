@@ -92,9 +92,9 @@ public class Monster : WorldBase<MonsterDataSO>
         if (nowHp <= 0 && player == ePlayer.me)
         {
             GamePacket packet = new GamePacket();
+            GameManager.instance.RemoveMonster(monsterId);
             packet.MonsterDeathNotification = new C2SMonsterDeathNotification() { MonsterId = monsterId };
             SocketManager.instance.Send(packet);
-            GameManager.instance.RemoveMonster(monsterId);
         }
     }
 

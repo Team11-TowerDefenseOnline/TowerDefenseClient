@@ -224,7 +224,9 @@ public class GameManager : MonoSingleton<GameManager>
     public void AddTower(TowerData data, ePlayer player)
     {
         var tower = AddTower(data.X, data.Y, player);
-        tower.Init(DataManager.instance.GetData<TowerDataSO>("TOW00001"));
+        var rand = Util.Random(0, 4);
+        var towerList = new string[] { "TOW00001", "TOW00002", "TOW00003", "TOW00004" };
+        tower.Init(DataManager.instance.GetData<TowerDataSO>(towerList[rand]));
         tower.towerId = data.TowerId;
         tower.player = player;
         towers.Add(tower);
