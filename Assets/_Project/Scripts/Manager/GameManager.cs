@@ -344,6 +344,8 @@ public void OnGameEnd()
     {
         monsters.RemoveAll(obj => obj == null);
         var targetMonster = monsters.Find(obj => obj.monsterId == monsterId);
+        Debug.Log(monsterId);
+        Debug.Log(monsters);
         if (targetMonster != null)
         {
             var idx = monsters.IndexOf(targetMonster);
