@@ -107,9 +107,9 @@ public class GameManager : MonoSingleton<GameManager>
     {
         isGameStart = true;
         Time.timeScale = 1;
-        _homeHp1 = 100;
-        _homeHp2 = 100;
-        UIManager.Get<UIGame>().InitHpGauge(homeHp1);
+        _homeHp1 = 500;
+        _homeHp2 = 500;
+        UIManager.Get<UIGame>().InitHpGauge(500);
         gold = 5000;
         topScore = 0;
         score = 0;
@@ -340,11 +340,11 @@ public void OnGameEnd()
 
     public void RemoveMonster(int monsterId)
     {
-        monsters.RemoveAll(obj => obj == null);
         var targetMonster = monsters.Find(obj => obj.monsterId == monsterId);
         if (targetMonster != null)
         {
-            var idx = monsters.IndexOf(targetMonster);
+            var idx = monsters.FindIndex(obj => obj == targetMonster);
+            Debug.Log("Monsters: " + string.Join(", ", monsters));
             StartCoroutine(targetMonster.OnDeath(monster =>
             {
                 if (monster == null)
@@ -357,6 +357,7 @@ public void OnGameEnd()
                 }
             }));
         }
+        monsters.RemoveAll(obj => obj == null);
     }
 
     public void RemoveMonster(Monster monster)
